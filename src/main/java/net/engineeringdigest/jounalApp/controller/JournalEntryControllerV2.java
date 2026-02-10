@@ -1,6 +1,5 @@
 package net.engineeringdigest.jounalApp.controller;
 
-import com.sun.org.apache.bcel.internal.generic.ANEWARRAY;
 import net.engineeringdigest.jounalApp.entity.JournalEntry;
 import net.engineeringdigest.jounalApp.service.JournalEntryService;
 import org.bson.types.ObjectId;
@@ -9,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 @RestController
@@ -33,8 +31,7 @@ public class JournalEntryControllerV2 {
     @PostMapping
     public ResponseEntity<JournalEntry> createEntry(@RequestBody JournalEntry myEntry) {
         try {
-            myEntry.setDate(LocalDateTime.now());
-            journalEntryService.saveEntry(myEntry);
+             journalEntryService.saveEntry(myEntry);
             return new ResponseEntity<>(myEntry, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
